@@ -1,7 +1,8 @@
 <div class="container">
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"
+        (click)="handleCreateSchool( )">
         Add
     </button>
 
@@ -21,7 +22,8 @@
                     school.address.state }}
                 </td>
                 <td>
-                    <button (click)="handleUpdate( school._id )">
+                    <button (click)="handleUpdate( school )" data-toggle="modal" type="button"
+                        data-target="#exampleModalCenter">
                         Update
                     </button>
                     <button (click)="handleDelete( school._id )">
@@ -40,7 +42,9 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Add School</h5>
+                    <h5 class="modal-title" id="exampleModalCenterTitle" *ngIf="isUpdate"> Update School</h5>
+                    <h5 class="modal-title" id="exampleModalCenterTitle" *ngIf="!isUpdate"> Add School</h5>
+
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

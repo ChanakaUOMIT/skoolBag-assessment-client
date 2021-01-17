@@ -18,8 +18,12 @@ export class SchoolService {
     return this._http.get(this.base_url);
   }
 
+  updateSchool(_id: string, school: any) {
+    return this._http.put(this.base_url + `/${_id}`, school);
+  }
+
   deleteSchool(_id: string) {
-    return this._http.delete(this.base_url + `${_id}`);
+    return this._http.delete(this.base_url + `/${_id}`);
   }
 
 

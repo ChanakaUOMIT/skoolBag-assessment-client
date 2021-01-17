@@ -13,8 +13,9 @@ import { Router } from "@angular/router";
 export class SchoolsComponent implements OnInit {
   form: any;
   schools: School[];
-  showModal = false;
   showSpinner = "";
+  isUpdate = false
+  selectedSchoolID = null
 
   constructor(
     private _schoolService: SchoolService,
@@ -51,13 +52,24 @@ export class SchoolsComponent implements OnInit {
       },
 
     }
-    this._schoolService.createSchool(schoolDto).subscribe(
-      data => {
-        console.log("createSchool : ", data)
-        this.handleGetSchools()
-      },
-      error => console.log(error)
-    );
+    if (this.isUpdate) {
+      this._schoolService.updateSchool(this.selectedSchoolID, schoolDto).subscribe(
+        data => {
+          console.log("updateSchool : ", data)
+          this.handleGetSchools()
+        },
+        error => console.log(error)
+      );
+    } else {
+      this._schoolService.createSchool(schoolDto).subscribe(
+        data => {
+          console.log("createSchool : ", data)
+          this.handleGetSchools()
+        },
+        error => console.log(error)
+      );
+    }
+
     this.form.reset();
   }
 
@@ -80,17 +92,35 @@ export class SchoolsComponent implements OnInit {
         error => console.log(error)
       )
   }
+  handleCreateSchool() {
+    this.form.reset();
+    this.isUpdate = false
+    this.selectedSchoolID = null
+  }
 
-  handleUpdate(_id: string) {
+  handleUpdate(school: any) {
+    this.isUpdate = true
+    this.selectedSchoolID = school._id
+    console.log("SchoolsComponent ~ handleUpdate ", school)
+    this.form = this.fb.group({
+      name: this.fb.control(school.name, Validators.required),
+      registedStudents: this.fb.control(school.registedStudents, Validators.required),
+      street: this.fb.control(school.address.street, Validators.required),
+      suburb: this.fb.control(school.address.suburb, Validators.required),
+      postcode: this.fb.control(school.address.postcode, Validators.required),
+      state: this.fb.control(school.address.state, Validators.required),
+
+
+    });
     // alert(_id)
-    this._schoolService.deleteSchool(_id)
-      .subscribe(
-        data => {
-          console.log(data)
-          this.handleGetSchools()
-        },
-        error => console.log(error)
-      )
+    // this._schoolService.deleteSchool(_id)
+    //   .subscribe(
+    //     data => {
+    //       console.log(data)
+    //       this.handleGetSchools()
+    //     },
+    //     error => console.log(error)
+    //   )
   }
 
 
