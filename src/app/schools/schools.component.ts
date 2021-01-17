@@ -68,6 +68,7 @@ export class SchoolsComponent implements OnInit {
         error => console.log(error)
       );
     } else {
+      console.log("createSchool : ")
       this._schoolService.createSchool(schoolDto).subscribe(
         data => {
           console.log("createSchool : ", data)
@@ -166,13 +167,24 @@ export class SchoolsComponent implements OnInit {
     //   )
   }
 
-  get email() {
-    return this.form.get("email");
+  get name() {
+    return this.form.get("name");
   }
-  get password() {
-    return this.form.get("password");
+  get registedStudents() {
+    return this.form.get("registedStudents");
   }
-
+  get street() {
+    return this.form.get("street");
+  }
+  get suburb() {
+    return this.form.get("suburb");
+  }
+  get state() {
+    return this.form.get("state");
+  }
+  get postcode() {
+    return this.form.get("postcode");
+  }
   handlePageChange(event): void {
     console.log("SchoolsComponent ~ handlePageChange ~ event", event)
     this.page = event;

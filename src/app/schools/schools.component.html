@@ -1,16 +1,32 @@
 <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"
-        (click)="handleCreateSchool( )">
-        Add
-    </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"
+                        (click)="handleCreateSchool( )">
+                        Add New School
+                    </button>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
 
     <table class="table table-hover">
         <thead>
             <tr>
                 <th>School Name</th>
                 <th>Address</th>
+                <th>Registed students</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -21,6 +37,9 @@
                 <td>
                     {{ school.address.street + " " + school.address.suburb + " " + school.address.postcode + " "+
                     school.address.state }}
+                </td>
+                <td>
+                    {{ school.registedStudents }}
                 </td>
                 <td>
                     <button (click)="handleUpdate( school )" data-toggle="modal" type="button"
@@ -36,7 +55,7 @@
         </tbody>
     </table>
 
-    <nav aria-label="...">
+    <!-- <nav aria-label="...">
         <ul class="pagination pagination-sm">
             <li class="page-item ">
                 <a class="page-link" tabindex="-1">1</a>
@@ -47,7 +66,7 @@
             <li *ngFor=" let page of " class="page-item"><a class="page-link">2</a></li>
 
         </ul>
-    </nav>
+    </nav> -->
 
 
     <!-- Modal -->
@@ -68,40 +87,78 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="forName">Name</label>
-                                <input formControlName="name" type="text" class="form-control" id="name"
-                                    placeholder="name">
+                                <input formControlName="name" type="text" class="form-control" id="name" required
+                                    [class.is-invalid]="name.touched && name.invalid" placeholder="name">
+
+                                <div *ngIf="name.touched && name.invalid">
+                                    <div class="alert alert-danger" *ngIf="name.errors.required">
+                                        <small>Please enter School name</small>
+                                    </div>
+                                </div>
                             </div>
+
+
                             <div class="form-group col-md-6">
                                 <label for="registedStudents">Registered Students </label>
-                                <input formControlName="registedStudents" type="text" class="form-control" id="name"
-                                    placeholder="name">
+                                <input formControlName="registedStudents" type="number" class="form-control"
+                                    id="registedStudents" placeholder="Registed students" required
+                                    [class.is-invalid]="registedStudents.touched && registedStudents.invalid">
+                                <div *ngIf="registedStudents.touched && registedStudents.invalid">
+                                    <div class="alert alert-danger" *ngIf="registedStudents.errors.required">
+                                        <small>Please enter no of registed student</small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputAddress">Street</label>
-                            <input formControlName="street" type="text" class="form-control" id="inputAddress"
-                                placeholder="1234 Main St">
+                            <input formControlName="street" type="text" class="form-control" id="street"
+                                placeholder="Street" required [class.is-invalid]="street.touched && street.invalid">
+                            <div *ngIf="street.touched && street.invalid">
+                                <div class="alert alert-danger" *ngIf="street.errors.required">
+                                    <small>Please enter street</small>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputCity">City</label>
-                                <input formControlName="suburb" type="text" class="form-control" id="inputCity">
+                                <input formControlName="suburb" type="text" class="form-control" id="suburb"
+                                    placeholder="City" required [class.is-invalid]="suburb.touched && suburb.invalid">
+                                <div *ngIf="suburb.touched && suburb.invalid">
+                                    <div class="alert alert-danger" *ngIf="suburb.errors.required">
+                                        <small>Please enter city</small>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputState">State</label>
-                                <input formControlName="state" type="text" class="form-control" id="inputState">
+                                <input formControlName="state" type="text" class="form-control" id="state"
+                                    placeholder="State" required [class.is-invalid]="state.touched && state.invalid">
+                                <div *ngIf="state.touched && state.invalid">
+                                    <div class="alert alert-danger" *ngIf="state.errors.required">
+                                        <small>Please enter state</small>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="inputZip">Zip</label>
-                                <input formControlName="postcode" type="text" class="form-control" id="inputZip">
+                                <input formControlName="postcode" type="text" class="form-control" id="postcode"
+                                    placeholder="Zip code" required
+                                    [class.is-invalid]="postcode.touched && postcode.invalid">
+                                <div *ngIf="postcode.touched && postcode.invalid">
+                                    <div class="alert alert-danger" *ngIf="postcode.errors.required">
+                                        <small>Please enter ZIP</small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"
-                        (click)="onSubmit(form)">Submit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onSubmit(form)"
+                        [class.disabled]="form.invalid">Submit</button>
                 </div>
             </div>
         </div>
