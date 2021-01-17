@@ -10,15 +10,17 @@ export class SchoolService {
   base_url = environment.backend_url;
   constructor(private _http: HttpClient) { }
 
+  createSchool(school: any) {
+    return this._http.post(this.base_url, school);
+  }
+
   getAllSchools() {
     return this._http.get(this.base_url);
   }
 
   deleteSchool(_id: string) {
-    console.log("deleteSchool ~ _id", _id)
-    console.log("deleteSchool ~ _id", this.base_url + `${_id}`)
-
-
     return this._http.delete(this.base_url + `${_id}`);
   }
+
+
 }
