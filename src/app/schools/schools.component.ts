@@ -16,6 +16,13 @@ export class SchoolsComponent implements OnInit {
   showSpinner = "";
   isUpdate = false
   selectedSchoolID = null
+  pagination = null
+  selectedSchool = null
+
+  page = 1;
+  count = 0;
+  pageSize = 3;
+  pageSizes = [3, 6, 9];
 
   constructor(
     private _schoolService: SchoolService,
@@ -77,20 +84,41 @@ export class SchoolsComponent implements OnInit {
     this._schoolService.getAllSchools()
       .subscribe(schools => {
         this.schools = schools['payload']['docs'];
+        this.pagination = {
+          page: schools['payload']['page'],
+          nextPage: schools['payload']['nextPage'],
+          currentPage: schools['payload']['currentPage'],
+          pagingCounter: schools['payload']['pagingCounter'],
+          prevPage: schools['payload']['prevPage'],
+          totalDocs: schools['payload']['totalDocs'],
+          totalPages: schools['payload']['totalPages'],
+          hasNextPage: schools['payload']['hasNextPage'],
+          hasPrevPage: schools['payload']['hasPrevPage']
+        }
         console.log(this.schools);
+        console.log("pagination ", this.pagination);
+
       });
   }
 
-  handleDelete(_id: string) {
-    // alert(_id)
-    this._schoolService.deleteSchool(_id)
+  handleDelete() {
+    this._schoolService.deleteSchool(this.selectedSchool._id)
       .subscribe(
         data => {
           console.log(data)
           this.handleGetSchools()
+          this.selectedSchool = null
         },
         error => console.log(error)
       )
+  }
+
+  deleteConfiramtionHandler(school: any) {
+    this.selectedSchool = school
+  }
+
+  deleteCancelHandler() {
+    this.selectedSchool = null
   }
   handleCreateSchool() {
     this.form.reset();
@@ -143,6 +171,20 @@ export class SchoolsComponent implements OnInit {
   }
   get password() {
     return this.form.get("password");
+  }
+
+  handlePageChange(event): void {
+    console.log("SchoolsComponent ~ handlePageChange ~ event", event)
+    this.page = event;
+    // this.retrieveTutorials();
+  }
+
+  handlePageSizeChange(event): void {
+    console.log("SchoolsComponent ~ handlePageSizeChange ~ event", event)
+
+    // this.pageSize = event.target.value;
+    // this.page = 1;
+    // this.retrieveTutorials();
   }
 
 }
