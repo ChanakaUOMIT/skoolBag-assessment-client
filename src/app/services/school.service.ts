@@ -26,5 +26,9 @@ export class SchoolService {
     return this._http.delete(this.base_url + `/${_id}`);
   }
 
+  searchSchool(keyword: string) {
+    return this._http.get(this.base_url + `/search?keyword=${keyword}`);
+  }
+
 
 }

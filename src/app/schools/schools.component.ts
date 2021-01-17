@@ -12,6 +12,7 @@ import { Router } from "@angular/router";
 })
 export class SchoolsComponent implements OnInit {
   form: any;
+  searchForm: any;
   schools: School[];
   showSpinner = "";
   isUpdate = false
@@ -36,6 +37,11 @@ export class SchoolsComponent implements OnInit {
       suburb: ["", Validators.required],
       postcode: ["", Validators.required],
       state: ["", Validators.required],
+
+    });
+
+    this.searchForm = this.fb.group({
+      keyword: ["", Validators.required],
 
     });
   }
@@ -100,6 +106,36 @@ export class SchoolsComponent implements OnInit {
         console.log("pagination ", this.pagination);
 
       });
+  }
+
+  handleSearchSchools(form: any) {
+    console.log("form.value ", form.value);
+    this._schoolService.searchSchool(form.value.keyword)
+      .subscribe(schools => {
+        this.schools = schools['payload']['docs'];
+        this.pagination = {
+          page: schools['payload']['page'],
+          nextPage: schools['payload']['nextPage'],
+          currentPage: schools['payload']['currentPage'],
+          pagingCounter: schools['payload']['pagingCounter'],
+          prevPage: schools['payload']['prevPage'],
+          totalDocs: schools['payload']['totalDocs'],
+          totalPages: schools['payload']['totalPages'],
+          hasNextPage: schools['payload']['hasNextPage'],
+          hasPrevPage: schools['payload']['hasPrevPage']
+        }
+        console.log(this.schools);
+        console.log("pagination ", this.pagination);
+
+      },
+        error => console.log(error)
+      );
+  }
+
+  clearSearchHandler() {
+    this.searchForm.reset();
+    this.handleGetSchools()
+
   }
 
   handleDelete() {

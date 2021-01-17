@@ -14,14 +14,20 @@
                     </button>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <form class="form-inline my-2 my-lg-0" [formGroup]="searchForm"
+                (ngSubmit)="handleSearchSchools(searchForm)">
+                <input formControlName="keyword" class="form-control mr-sm-2" type="search" placeholder="Search"
+                    aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 " type="submit"
+                    [class.disabled]="searchForm.invalid">Search</button>
+
             </form>
+            <button class="btn btn-outline-danger my-2 my-sm-0 ml-1" (click)="clearSearchHandler(  )">Clear</button>
+
         </div>
     </nav>
 
-    <table class="table table-hover">
+    <table class="table table-hover  table-striped">
         <thead>
             <tr>
                 <th>School Name</th>
@@ -43,10 +49,10 @@
                 </td>
                 <td>
                     <button (click)="handleUpdate( school )" data-toggle="modal" type="button"
-                        data-target="#exampleModalCenter">
+                        data-target="#exampleModalCenter" type="button" class="btn btn-info mb-2">
                         Update
                     </button>
-                    <button data-toggle="modal" data-target="#deleteSchool"
+                    <button data-toggle="modal" data-target="#deleteSchool" type="button" class="btn btn-danger"
                         (click)="deleteConfiramtionHandler( school )">
                         Delete
                     </button>
