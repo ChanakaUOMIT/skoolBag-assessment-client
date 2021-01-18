@@ -33,8 +33,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    // DataTablesModule,
-    // NgxDatatableModule
     InfiniteScrollModule
   ],
   providers: [],

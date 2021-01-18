@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Page } from '../models/Page';
-import { SchoolService } from '../services/school.service';
 const nisPackage = require("../../../package.json");
 
 @Component({
@@ -46,11 +44,8 @@ export class SchoolListComponent implements OnInit {
 
   addItems(startIndex, endIndex, _method) {
     console.log("Add Items")
-    this.handleGetSchools.emit(++this.page);
-
-    // for (let i = 0; i < this.sum; ++i) {
-    //   this.array[_method]([i, " ", this.generateWord()].join(""));
-    // }
+    let isInfinite = true
+    this.handleGetSchools.emit({ page: ++this.page, isInfinite: isInfinite });
   }
 
   appendItems(startIndex, endIndex) {

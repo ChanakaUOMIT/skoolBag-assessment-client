@@ -14,12 +14,12 @@ export class SchoolComponent implements OnInit {
   showSpinner = "";
   pagination = null
   @Input() form: any;
+  @Input() page: any;
   @Input() isUpdate: any;
   @Input() selectedSchool: any;
   @Input() selectedSchoolID: any;
-  @Output() handleGetSchools = new EventEmitter<null>();
+  @Output() handleGetSchools = new EventEmitter<any>();
 
-  page = 1;
   count = 0;
   pageSize = 3;
   pageSizes = [3, 6, 9];
@@ -61,7 +61,7 @@ export class SchoolComponent implements OnInit {
       this._schoolService.updateSchool(this.selectedSchoolID, schoolDto).subscribe(
         data => {
           console.log("updateSchool : ", data)
-          this.handleGetSchools.emit()
+          this.handleGetSchools.emit({ page: 1, isInfinite: false })
         },
         error => console.log(error)
       );
@@ -70,7 +70,7 @@ export class SchoolComponent implements OnInit {
       this._schoolService.createSchool(schoolDto).subscribe(
         data => {
           console.log("createSchool : ", data)
-          this.handleGetSchools.emit()
+          this.handleGetSchools.emit(this.page)
         },
         error => console.log(error)
       );

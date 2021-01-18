@@ -82,12 +82,13 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="float-right">
+                        <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" type="submit"
+                            (click)="onSubmit(form)" [class.disabled]="form.invalid">Submit</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onSubmit(form)"
-                    [class.disabled]="form.invalid">Submit</button>
             </div>
         </div>
     </div>

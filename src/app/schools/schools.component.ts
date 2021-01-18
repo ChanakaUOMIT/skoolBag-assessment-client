@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { School } from '../models/School';
 import { SchoolService } from '../services/school.service';
 import { FormBuilder, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
-
 
 @Component({
   selector: 'app-schools',
@@ -24,7 +22,6 @@ export class SchoolsComponent implements OnInit {
   page = 1;
   constructor(
     private _schoolService: SchoolService,
-    private router: Router,
     private fb: FormBuilder,
   ) {
     this.form = this.fb.group({
@@ -45,18 +42,21 @@ export class SchoolsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.handleGetSchools()
+    this.handleGetSchools({ page: 1, isInfinite: false })
   }
 
   ngOnDestroy(): void {
     this.pagination = null
   }
 
-  handleGetSchools(page = 1) {
-    if (this.pagination == null || this.pagination.totalPages >= page)
+  handleGetSchools(props) {
+    const { page = 1, isInfinite = false } = props
+    console.log("handleGetSchools ~ isInfinite", isInfinite)
+    console.log("handleGetSchools ~ page", page)
+    if (page === 1 || this.pagination.totalPages >= page) {
       this._schoolService.getAllSchools(page)
         .subscribe(schools => {
-          this.schools = [...this.tempScl, ...schools['payload']['docs']];
+          this.schools = isInfinite ? [...this.tempScl, ...schools['payload']['docs']] : schools['payload']['docs'];
           this.tempScl = this.schools
           this.pagination = {
             page: schools['payload']['page'],
@@ -73,6 +73,8 @@ export class SchoolsComponent implements OnInit {
           console.log("pagination ", this.pagination);
 
         });
+    }
+
   }
 
   handleSearchSchools(form: any) {
@@ -101,7 +103,9 @@ export class SchoolsComponent implements OnInit {
 
   clearSearchHandler() {
     this.searchForm.reset();
-    this.handleGetSchools()
+    this.page = 1
+    this.handleGetSchools({ page: 1, isInfinite: false })
+
 
   }
 
@@ -110,7 +114,9 @@ export class SchoolsComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data)
-          this.handleGetSchools()
+          this.handleGetSchools({ page: 1, isInfinite: false })
+          this.searchForm.reset();
+
           this.selectedSchool = null
         },
         error => console.log(error)
@@ -132,6 +138,7 @@ export class SchoolsComponent implements OnInit {
 
   handleUpdate(school: any) {
     console.log("SchoolsComponent ~ handleUpdate ", school)
+    this.searchForm.reset();
 
     this.isUpdate = true
     this.selectedSchoolID = school._id

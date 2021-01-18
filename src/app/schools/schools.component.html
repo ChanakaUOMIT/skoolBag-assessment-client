@@ -8,8 +8,8 @@
         (handleGetSchools)="handleGetSchools($event)">
     </app-school-list>
 
-    <app-school [form]="form" [isUpdate]="isUpdate" [selectedSchool]="selectedSchool"
-        [selectedSchoolID]="selectedSchoolID" (handleGetSchools)="handleGetSchools()"></app-school>
+    <app-school [form]="form" [isUpdate]="isUpdate" [selectedSchool]="selectedSchool" [page]="page"
+        [selectedSchoolID]="selectedSchoolID" (handleGetSchools)="handleGetSchools($event)"></app-school>
 
     <app-delete-school [selectedSchool]="selectedSchool" (deleteCancelHandler)="deleteCancelHandler()"
         (handleDelete)="handleDelete()"></app-delete-school>
