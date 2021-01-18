@@ -13,8 +13,6 @@ import { DeleteSchoolComponent } from './delete-school/delete-school.component';
 import { SchoolListComponent } from './school-list/school-list.component';
 import { SchoolsHeaderComponent } from './schools-header/schools-header.component';
 import { AppNavComponent } from './app-nav/app-nav.component';
-// import { DataTablesModule } from 'angular-datatables';
-// import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
@@ -26,7 +24,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     DeleteSchoolComponent,
     SchoolListComponent,
     SchoolsHeaderComponent,
-    AppNavComponent
+    AppNavComponent,
   ],
   imports: [
     BrowserModule,
