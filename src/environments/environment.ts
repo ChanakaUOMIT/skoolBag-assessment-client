@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backend_url: 'http://master.ap-southeast-1.elasticbeanstalk.com/api/school'
+  backend_url: 'https://d2cr8vjvxxzaee.cloudfront.net/api/school'
 
 };
 
