@@ -14,10 +14,12 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" [formGroup]="searchForm" (ngSubmit)="searchHandler(searchForm)">
-            <input formControlName="keyword" class="form-control mr-sm-2" type="search" placeholder="Search"
-                aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0 " type="submit"
-                [class.disabled]="searchForm.invalid">Search</button>
+            <div class="btn-group">
+                <input formControlName="keyword" id="searchinput" type="search" class="form-control"
+                    placeholder="Search here">
+                <span id="searchclear" class="glyphicon glyphicon-remove-circle"
+                    (click)="clearSearchHandler.emit(  )"></span>
+            </div>
 
         </form>
         <button class="btn btn-outline-danger my-2 my-sm-0 ml-1" (click)="clearSearchHandler.emit(  )">Clear</button>

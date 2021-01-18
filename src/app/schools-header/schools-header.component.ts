@@ -18,7 +18,9 @@ export class SchoolsHeaderComponent implements OnInit {
   }
 
   searchHandler(searchForm: any) {
-    this.handleSearchSchools.emit(searchForm);
+    if (!!searchForm.value.keyword) {
+      this.handleSearchSchools.emit(searchForm);
+    }
   }
 
 }
