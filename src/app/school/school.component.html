@@ -37,6 +37,11 @@
                                     <small>Please enter no of registed student</small>
                                 </div>
                             </div>
+                            <div *ngIf="registedStudents.touched && registedStudents.min">
+                                <div class="alert alert-danger" *ngIf="registedStudents.errors.required">
+                                    <small>Please enter no of registed student</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -85,9 +90,8 @@
 
                     <div class="float-right">
                         <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" type="submit"
-                            (click)="onSubmit(form)" [disabled]="form.invalid"
-                            [class.disabled]="form.invalid">Submit</button>
+                        <button data-dismiss="modal" type="button" class="btn btn-primary" type="submit"
+                            (click)="onSubmit(form)" [class.disabled]="form.invalid">Submit</button>
                     </div>
                 </form>
             </div>

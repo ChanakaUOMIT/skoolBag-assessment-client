@@ -26,7 +26,7 @@ export class SchoolsComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       name: ["", Validators.required],
-      registedStudents: ["", Validators.required],
+      registedStudents: ["", [Validators.required, Validators.min(0)]],
       street: ["", Validators.required],
       suburb: ["", Validators.required],
       postcode: ["", Validators.required],

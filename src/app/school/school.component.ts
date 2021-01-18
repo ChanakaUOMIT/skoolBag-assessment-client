@@ -44,39 +44,36 @@ export class SchoolComponent implements OnInit {
   }
 
   onSubmit(form: any) {
-    this.showSpinner = "true";
-    console.log("form.value ", form.value);
-    let schoolDto = {
-      name: form.value.name,
-      registedStudents: form.value.registedStudents,
-      address: {
-        street: form.value.street,
-        suburb: form.value.suburb,
-        postcode: form.value.postcode,
-        state: form.value.state,
-      },
+    if (!form.invalid) {
+      let schoolDto = {
+        name: form.value.name,
+        registedStudents: form.value.registedStudents,
+        address: {
+          street: form.value.street,
+          suburb: form.value.suburb,
+          postcode: form.value.postcode,
+          state: form.value.state,
+        },
+      }
+      if (this.isUpdate) {
+        this._schoolService.updateSchool(this.selectedSchoolID, schoolDto).subscribe(
+          data => {
+            this.handleGetSchools.emit({ page: 1, isInfinite: false })
+          },
+          error => console.log(error)
+        );
+      } else {
+        this._schoolService.createSchool(schoolDto).subscribe(
+          data => {
+            this.handleGetSchools.emit(this.page)
+          },
+          error => console.log(error)
+        );
+      }
 
-    }
-    if (this.isUpdate) {
-      this._schoolService.updateSchool(this.selectedSchoolID, schoolDto).subscribe(
-        data => {
-          console.log("updateSchool : ", data)
-          this.handleGetSchools.emit({ page: 1, isInfinite: false })
-        },
-        error => console.log(error)
-      );
-    } else {
-      console.log("createSchool : ")
-      this._schoolService.createSchool(schoolDto).subscribe(
-        data => {
-          console.log("createSchool : ", data)
-          this.handleGetSchools.emit(this.page)
-        },
-        error => console.log(error)
-      );
+      this.form.reset();
     }
 
-    this.form.reset();
   }
 
   handleCreateSchool() {

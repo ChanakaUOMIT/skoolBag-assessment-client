@@ -1,27 +1,52 @@
-# SkoolBag
+# School Management Dashboard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.3.
+This project is to build a REST API backend application that can be used to manage schools.
 
-## Development server
+Hosted web : [https://d390iqortngohx.cloudfront.net/](https://d390iqortngohx.cloudfront.net/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Table of Contents
 
-## Code scaffolding
+- [Installation](#installation)
+- [Usage](#usage)
+- [Implementation](#implementation)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<a name="installation"></a>
 
-## Build
+## Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Prerequisites
 
-## Running unit tests
+- Node.js with ESM Support (**v14+**)
+- MongoDB
+- Anguar
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Start App
 
-## Running end-to-end tests
+- Clone Backend this repo: `git clone https://github.com/ChanakaUOMIT/skoolBag-assessment-backend.git`
+- Install dependencies: `npm install`
+- Start this application: `npm start`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+- Clone Client this repo: `git clone https://github.com/ChanakaUOMIT/skoolBag-assessment-client.git`
+- Install dependencies: `npm install`
+- Start this application: `ng serve`
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<a name="usage"></a>
+
+## Usage
+
+Published API Doc: [https://documenter.getpostman.com/view/14239685/TVzXBaa5](https://documenter.getpostman.com/view/14239685/TVzXBaa5)
+
+<a name="key_features"></a>
+
+## Implementation
+
+- Add School
+- Get All Schools
+- Update School
+- Delete School
+- Full Text Searching school (Name and Address)
+- Pagination
+- Infinity loading
+- Configured Continuous Integration(CI)
+- Configured Dev & Prod Environments
