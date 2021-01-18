@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-const nisPackage = require("../../../package.json");
+// const nisPackage = require("../../../package.json");
 
 @Component({
   selector: 'app-school-list',
@@ -23,7 +23,7 @@ export class SchoolListComponent implements OnInit {
   direction = "";
   modalOpen = false;
 
-  nisVersion = nisPackage.dependencies["ngx-infinite-scroll"];
+  // nisVersion = nisPackage.dependencies["ngx-infinite-scroll"];
   constructor(
   ) {
     this.appendItems(0, this.sum);
