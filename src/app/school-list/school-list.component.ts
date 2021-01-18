@@ -1,4 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Page } from '../models/Page';
+import { SchoolService } from '../services/school.service';
+const nisPackage = require("../../../package.json");
 
 @Component({
   selector: 'app-school-list',
@@ -7,12 +10,29 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class SchoolListComponent implements OnInit {
   @Input() schools: any;
+  @Input() page: any;
   @Input() selectedSchool: any;
   @Output() handleUpdate = new EventEmitter<any>();
   @Output() deleteConfiramtionHandler = new EventEmitter<any>();
-  constructor() { }
+  @Output() handleGetSchools = new EventEmitter<any>();
 
-  ngOnInit(): void {
+
+  array = [];
+  sum = 100;
+  throttle = 300;
+  scrollDistance = 1;
+  scrollUpDistance = 2;
+  direction = "";
+  modalOpen = false;
+
+  nisVersion = nisPackage.dependencies["ngx-infinite-scroll"];
+  constructor(
+  ) {
+    this.appendItems(0, this.sum);
+
+  }
+
+  ngOnInit() {
   }
 
   updateHandler(school: any) {
@@ -22,5 +42,51 @@ export class SchoolListComponent implements OnInit {
   deleteHandler(school: any) {
     this.deleteConfiramtionHandler.emit(school);
   }
+
+
+  addItems(startIndex, endIndex, _method) {
+    console.log("Add Items")
+    this.handleGetSchools.emit(++this.page);
+
+    // for (let i = 0; i < this.sum; ++i) {
+    //   this.array[_method]([i, " ", this.generateWord()].join(""));
+    // }
+  }
+
+  appendItems(startIndex, endIndex) {
+    this.addItems(startIndex, endIndex, "push");
+  }
+
+  prependItems(startIndex, endIndex) {
+    this.addItems(startIndex, endIndex, "unshift");
+  }
+
+  onScrollDown(ev) {
+    console.log("scrolled down!!", ev);
+
+    // add another 20 items
+    const start = this.sum;
+    this.sum += 20;
+    this.appendItems(start, this.sum);
+
+    this.direction = "down";
+  }
+
+  onUp(ev) {
+    console.log("scrolled up!", ev);
+    const start = this.sum;
+    this.sum += 20;
+    this.prependItems(start, this.sum);
+
+    this.direction = "up";
+  }
+  // generateWord() {
+  //   return chance.word();
+  // }
+
+  toggleModal() {
+    this.modalOpen = !this.modalOpen;
+  }
+
 
 }

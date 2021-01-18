@@ -19,11 +19,9 @@ export class SchoolsComponent implements OnInit {
   selectedSchoolID = null
   pagination = null
   selectedSchool = null
+  tempScl = []
 
   page = 1;
-  count = 0;
-  pageSize = 3;
-  pageSizes = [3, 6, 9];
   constructor(
     private _schoolService: SchoolService,
     private router: Router,
@@ -50,25 +48,31 @@ export class SchoolsComponent implements OnInit {
     this.handleGetSchools()
   }
 
-  handleGetSchools() {
-    this._schoolService.getAllSchools()
-      .subscribe(schools => {
-        this.schools = schools['payload']['docs'];
-        this.pagination = {
-          page: schools['payload']['page'],
-          nextPage: schools['payload']['nextPage'],
-          currentPage: schools['payload']['currentPage'],
-          pagingCounter: schools['payload']['pagingCounter'],
-          prevPage: schools['payload']['prevPage'],
-          totalDocs: schools['payload']['totalDocs'],
-          totalPages: schools['payload']['totalPages'],
-          hasNextPage: schools['payload']['hasNextPage'],
-          hasPrevPage: schools['payload']['hasPrevPage']
-        }
-        console.log(this.schools);
-        console.log("pagination ", this.pagination);
+  ngOnDestroy(): void {
+    this.pagination = null
+  }
 
-      });
+  handleGetSchools(page = 1) {
+    if (this.pagination == null || this.pagination.totalPages >= page)
+      this._schoolService.getAllSchools(page)
+        .subscribe(schools => {
+          this.schools = [...this.tempScl, ...schools['payload']['docs']];
+          this.tempScl = this.schools
+          this.pagination = {
+            page: schools['payload']['page'],
+            nextPage: schools['payload']['nextPage'],
+            currentPage: schools['payload']['currentPage'],
+            pagingCounter: schools['payload']['pagingCounter'],
+            prevPage: schools['payload']['prevPage'],
+            totalDocs: schools['payload']['totalDocs'],
+            totalPages: schools['payload']['totalPages'],
+            hasNextPage: schools['payload']['hasNextPage'],
+            hasPrevPage: schools['payload']['hasPrevPage']
+          }
+          console.log("this.schools ", this.schools);
+          console.log("pagination ", this.pagination);
+
+        });
   }
 
   handleSearchSchools(form: any) {
@@ -143,15 +147,5 @@ export class SchoolsComponent implements OnInit {
     });
   }
 
-  handlePageChange(event): void {
-    console.log("SchoolsComponent ~ handlePageChange ~ event", event)
-    this.page = event;
-    // this.retrieveTutorials();
-  }
-
-  handlePageSizeChange(event): void {
-    console.log("SchoolsComponent ~ handlePageSizeChange ~ event", event)
-
-  }
 
 }

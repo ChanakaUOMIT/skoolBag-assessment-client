@@ -14,8 +14,8 @@ export class SchoolService {
     return this._http.post(this.base_url, school);
   }
 
-  getAllSchools() {
-    return this._http.get(this.base_url);
+  getAllSchools(page) {
+    return this._http.get(this.base_url + `?page=${page}`);
   }
 
   updateSchool(_id: string, school: any) {

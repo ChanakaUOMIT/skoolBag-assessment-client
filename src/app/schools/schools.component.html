@@ -2,8 +2,11 @@
     <app-schools-header [searchForm]="searchForm" (handleCreateSchool)="handleCreateSchool()"
         (handleSearchSchools)="handleSearchSchools($event)" (clearSearchHandler)="clearSearchHandler()">
     </app-schools-header>
-    <app-school-list [schools]="schools" [selectedSchool]="selectedSchool" (handleUpdate)="handleUpdate($event)"
-        (deleteConfiramtionHandler)="deleteConfiramtionHandler($event)"></app-school-list>
+
+    <app-school-list [schools]="schools" [selectedSchool]="selectedSchool" [page]="page"
+        (handleUpdate)="handleUpdate($event)" (deleteConfiramtionHandler)="deleteConfiramtionHandler($event)"
+        (handleGetSchools)="handleGetSchools($event)">
+    </app-school-list>
 
     <app-school [form]="form" [isUpdate]="isUpdate" [selectedSchool]="selectedSchool"
         [selectedSchoolID]="selectedSchoolID" (handleGetSchools)="handleGetSchools()"></app-school>

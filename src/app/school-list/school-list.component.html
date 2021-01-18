@@ -1,19 +1,32 @@
 <table class="table table-hover  table-striped">
     <thead>
         <tr>
-            <th>School Name</th>
+            <th style="width: 35%;">School Name</th>
             <th>Address</th>
             <th>Registed students</th>
             <th>Action</th>
         </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let school of schools
-        ">
+    <tbody *ngIf="schools.length !== 0" infinite-scroll [infiniteScrollDistance]="scrollDistance"
+        [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()"
+        (scrolledUp)="onUp()">
+        <tr *ngFor="let school of schools">
             <td>{{ school.name}}</td>
             <td>
-                {{ school.address.street + " " + school.address.suburb + " " + school.address.postcode + " "+
-                school.address.state }}
+                <div>
+                    <span class="scl-list-address-label"> Street </span> : <span class="scl-list-address-value">{{
+                        school.address.street}} </span> <br>
+                    <span class="scl-list-address-label"> City </span>: <span class="scl-list-address-value">{{
+                        school.address.suburb}} </span><br>
+                    <span class="scl-list-address-label"> State </span>: <span class="scl-list-address-value">{{
+                        school.address.state}} </span><br>
+                    <span class="scl-list-address-label"> Post code </span>: <span class="scl-list-address-value">{{
+                        school.address.postcode}}</span>
+                    <br>
+
+                </div>
+                <!-- {{ school.address.street + " " + school.address.suburb + " " + school.address.postcode + " "+
+                school.address.state }} -->
             </td>
             <td>
                 {{ school.registedStudents }}
@@ -30,4 +43,7 @@
             </td>
         </tr>
     </tbody>
+    <div *ngIf="schools.length === 0">
+        No schools
+    </div>
 </table>
