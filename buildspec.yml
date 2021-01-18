@@ -1,0 +1,20 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:      
+      #Install Frontend NPM Module
+      - echo Installing source NPM dependencies...
+      - npm install
+  build:
+    commands:       
+      # Build Frontend
+      - echo Build started on `date`
+      - npm run build      
+  post_build:
+    commands:      
+      # Frontend Deploy
+      # - aws s3 cp --recursive build s3://${DeployBucket}/ 
+      # - aws cloudfront create-invalidation --distribution-id ${Distribution} --paths "/*"
+artifacts:
+  files:
+    - '**/*'

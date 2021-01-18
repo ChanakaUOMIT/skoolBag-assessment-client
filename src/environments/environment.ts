@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  backend_url: 'http://localhost:8080/api/school'
+  backend_url: 'http://master.ap-southeast-1.elasticbeanstalk.com/api/school'
+
 };
 
 /*
