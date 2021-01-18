@@ -1,0 +1,94 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle" *ngIf="isUpdate"> Update School</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle" *ngIf="!isUpdate"> Add School</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="forName">Name</label>
+                            <input formControlName="name" type="text" class="form-control" id="name" required
+                                [class.is-invalid]="name.touched && name.invalid" placeholder="name">
+
+                            <div *ngIf="name.touched && name.invalid">
+                                <div class="alert alert-danger" *ngIf="name.errors.required">
+                                    <small>Please enter School name</small>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col-md-6">
+                            <label for="registedStudents">Registered Students </label>
+                            <input formControlName="registedStudents" type="number" class="form-control"
+                                id="registedStudents" placeholder="Registed students" required
+                                [class.is-invalid]="registedStudents.touched && registedStudents.invalid">
+                            <div *ngIf="registedStudents.touched && registedStudents.invalid">
+                                <div class="alert alert-danger" *ngIf="registedStudents.errors.required">
+                                    <small>Please enter no of registed student</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress">Street</label>
+                        <input formControlName="street" type="text" class="form-control" id="street"
+                            placeholder="Street" required [class.is-invalid]="street.touched && street.invalid">
+                        <div *ngIf="street.touched && street.invalid">
+                            <div class="alert alert-danger" *ngIf="street.errors.required">
+                                <small>Please enter street</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">City</label>
+                            <input formControlName="suburb" type="text" class="form-control" id="suburb"
+                                placeholder="City" required [class.is-invalid]="suburb.touched && suburb.invalid">
+                            <div *ngIf="suburb.touched && suburb.invalid">
+                                <div class="alert alert-danger" *ngIf="suburb.errors.required">
+                                    <small>Please enter city</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputState">State</label>
+                            <input formControlName="state" type="text" class="form-control" id="state"
+                                placeholder="State" required [class.is-invalid]="state.touched && state.invalid">
+                            <div *ngIf="state.touched && state.invalid">
+                                <div class="alert alert-danger" *ngIf="state.errors.required">
+                                    <small>Please enter state</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Zip</label>
+                            <input formControlName="postcode" type="text" class="form-control" id="postcode"
+                                placeholder="Zip code" required
+                                [class.is-invalid]="postcode.touched && postcode.invalid">
+                            <div *ngIf="postcode.touched && postcode.invalid">
+                                <div class="alert alert-danger" *ngIf="postcode.errors.required">
+                                    <small>Please enter ZIP</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onSubmit(form)"
+                    [class.disabled]="form.invalid">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

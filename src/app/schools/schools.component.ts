@@ -24,7 +24,6 @@ export class SchoolsComponent implements OnInit {
   count = 0;
   pageSize = 3;
   pageSizes = [3, 6, 9];
-
   constructor(
     private _schoolService: SchoolService,
     private router: Router,
@@ -49,42 +48,6 @@ export class SchoolsComponent implements OnInit {
 
   ngOnInit(): void {
     this.handleGetSchools()
-  }
-
-  onSubmit(form: any) {
-    this.showSpinner = "true";
-    console.log("form.value ", form.value);
-    let schoolDto = {
-      name: form.value.name,
-      registedStudents: form.value.registedStudents,
-      address: {
-        street: form.value.street,
-        suburb: form.value.suburb,
-        postcode: form.value.postcode,
-        state: form.value.state,
-      },
-
-    }
-    if (this.isUpdate) {
-      this._schoolService.updateSchool(this.selectedSchoolID, schoolDto).subscribe(
-        data => {
-          console.log("updateSchool : ", data)
-          this.handleGetSchools()
-        },
-        error => console.log(error)
-      );
-    } else {
-      console.log("createSchool : ")
-      this._schoolService.createSchool(schoolDto).subscribe(
-        data => {
-          console.log("createSchool : ", data)
-          this.handleGetSchools()
-        },
-        error => console.log(error)
-      );
-    }
-
-    this.form.reset();
   }
 
   handleGetSchools() {
@@ -177,50 +140,8 @@ export class SchoolsComponent implements OnInit {
 
 
     });
-    // alert(_id)
-    // this._schoolService.deleteSchool(_id)
-    //   .subscribe(
-    //     data => {
-    //       console.log(data)
-    //       this.handleGetSchools()
-    //     },
-    //     error => console.log(error)
-    //   )
   }
 
-
-  addSchoolHandler() {
-    // alert(_id)
-    console.log("new")
-
-    // this._schoolService.deleteSchool(_id)
-    //   .subscribe(
-    //     data => {
-    //       console.log(data)
-    //       this.handleGetSchools()
-    //     },
-    //     error => console.log(error)
-    //   )
-  }
-
-  get name() {
-    return this.form.get("name");
-  }
-  get registedStudents() {
-    return this.form.get("registedStudents");
-  }
-  get street() {
-    return this.form.get("street");
-  }
-  get suburb() {
-    return this.form.get("suburb");
-  }
-  get state() {
-    return this.form.get("state");
-  }
-  get postcode() {
-    return this.form.get("postcode");
-  }
   handlePageChange(event): void {
     console.log("SchoolsComponent ~ handlePageChange ~ event", event)
     this.page = event;
@@ -230,9 +151,6 @@ export class SchoolsComponent implements OnInit {
   handlePageSizeChange(event): void {
     console.log("SchoolsComponent ~ handlePageSizeChange ~ event", event)
 
-    // this.pageSize = event.target.value;
-    // this.page = 1;
-    // this.retrieveTutorials();
   }
 
 }

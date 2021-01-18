@@ -8,12 +8,14 @@ import { SchoolsComponent } from './schools/schools.component';
 import { AddSchoolComponent } from './add-school/add-school.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SchoolComponent } from './school/school.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SchoolsComponent,
-    AddSchoolComponent
+    AddSchoolComponent,
+    SchoolComponent
   ],
   imports: [
     BrowserModule,
