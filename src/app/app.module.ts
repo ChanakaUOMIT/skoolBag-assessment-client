@@ -11,6 +11,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SchoolComponent } from './school/school.component';
 import { DeleteSchoolComponent } from './delete-school/delete-school.component';
 import { SchoolListComponent } from './school-list/school-list.component';
+import { SchoolsHeaderComponent } from './schools-header/schools-header.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SchoolListComponent } from './school-list/school-list.component';
     AddSchoolComponent,
     SchoolComponent,
     DeleteSchoolComponent,
-    SchoolListComponent
+    SchoolListComponent,
+    SchoolsHeaderComponent
   ],
   imports: [
     BrowserModule,
