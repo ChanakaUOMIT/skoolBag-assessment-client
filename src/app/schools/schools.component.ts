@@ -127,9 +127,10 @@ export class SchoolsComponent implements OnInit {
   }
 
   handleUpdate(school: any) {
+    console.log("SchoolsComponent ~ handleUpdate ", school)
+
     this.isUpdate = true
     this.selectedSchoolID = school._id
-    console.log("SchoolsComponent ~ handleUpdate ", school)
     this.form = this.fb.group({
       name: this.fb.control(school.name, Validators.required),
       registedStudents: this.fb.control(school.registedStudents, Validators.required),

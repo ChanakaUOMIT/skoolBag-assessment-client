@@ -1,0 +1,33 @@
+<table class="table table-hover  table-striped">
+    <thead>
+        <tr>
+            <th>School Name</th>
+            <th>Address</th>
+            <th>Registed students</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let school of schools
+        ">
+            <td>{{ school.name}}</td>
+            <td>
+                {{ school.address.street + " " + school.address.suburb + " " + school.address.postcode + " "+
+                school.address.state }}
+            </td>
+            <td>
+                {{ school.registedStudents }}
+            </td>
+            <td>
+                <button (click)="updateHandler( school )" data-toggle="modal" type="button"
+                    data-target="#exampleModalCenter" type="button" class="btn btn-info mb-2">
+                    Update
+                </button>
+                <button data-toggle="modal" data-target="#deleteSchool" type="button" class="btn btn-danger"
+                    (click)="deleteHandler( school )">
+                    Delete
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

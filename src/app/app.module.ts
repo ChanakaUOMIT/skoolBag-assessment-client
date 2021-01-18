@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SchoolComponent } from './school/school.component';
 import { DeleteSchoolComponent } from './delete-school/delete-school.component';
+import { SchoolListComponent } from './school-list/school-list.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { DeleteSchoolComponent } from './delete-school/delete-school.component';
     SchoolsComponent,
     AddSchoolComponent,
     SchoolComponent,
-    DeleteSchoolComponent
+    DeleteSchoolComponent,
+    SchoolListComponent
   ],
   imports: [
     BrowserModule,
