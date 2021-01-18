@@ -13,7 +13,7 @@ phases:
   post_build:
     commands:      
       # Frontend Deploy
-      - aws s3 cp --recursive build s3://${DeployBucket}/ 
+      - aws s3 cp --recursive dist/skool-bag s3://${DeployBucket}/ 
       - aws cloudfront create-invalidation --distribution-id ${Distribution} --paths "/*"
 artifacts:
   files:
