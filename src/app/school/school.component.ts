@@ -19,7 +19,6 @@ export class SchoolComponent implements OnInit {
   @Input() selectedSchoolID: any;
   @Output() handleGetSchools = new EventEmitter<null>();
 
-
   page = 1;
   count = 0;
   pageSize = 3;

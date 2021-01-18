@@ -9,13 +9,15 @@ import { AddSchoolComponent } from './add-school/add-school.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SchoolComponent } from './school/school.component';
+import { DeleteSchoolComponent } from './delete-school/delete-school.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SchoolsComponent,
     AddSchoolComponent,
-    SchoolComponent
+    SchoolComponent,
+    DeleteSchoolComponent
   ],
   imports: [
     BrowserModule,
