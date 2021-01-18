@@ -12,6 +12,7 @@ import { SchoolComponent } from './school/school.component';
 import { DeleteSchoolComponent } from './delete-school/delete-school.component';
 import { SchoolListComponent } from './school-list/school-list.component';
 import { SchoolsHeaderComponent } from './schools-header/schools-header.component';
+import { AppNavComponent } from './app-nav/app-nav.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SchoolsHeaderComponent } from './schools-header/schools-header.componen
     SchoolComponent,
     DeleteSchoolComponent,
     SchoolListComponent,
-    SchoolsHeaderComponent
+    SchoolsHeaderComponent,
+    AppNavComponent
   ],
   imports: [
     BrowserModule,
